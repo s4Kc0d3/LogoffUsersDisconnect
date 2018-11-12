@@ -14,11 +14,11 @@ if ($usersDisc){
 		if ($today -eq $date){
 			Write-Host "User: $user is inactive today: $date"			
 		}elseif ($yesterday -eq $date){
-            write-host "User: $user is inactive since yesterday: $date"
-        }else{
-            Write-Host "We proceed to disconnecting the user: $user dated $date by being inactive for more than 48 h"
-            logoff ($_.tostring() -split ' +')[2]
-        }
+            		write-host "User: $user is inactive since yesterday: $date"
+		}else{
+		    Write-Host "We proceed to disconnecting the user: $user dated $date by being inactive for more than 48 h"
+		    logoff ($_.tostring() -split ' +')[2]
+        	}
 	}
 }else{
 	Write-Host "There are no inactive users in the system"
