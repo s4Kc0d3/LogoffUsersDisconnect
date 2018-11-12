@@ -2,8 +2,8 @@
 #Created By: Isaac Iborra (iiborra@externos.itnow.es)
 
 $usersDisc = quser | select-string "Disc" | select-string -notmatch "services"
-$today = (get-date).tostring('dd/MM/yyyy')
-$yesterday = (get-date).addDays(-1).tostring('dd/MM/yyyy')
+$today = (get-date).tostring('MM/dd/yyyy')
+$yesterday = (get-date).addDays(-1).tostring('MM/dd/yyyy')
 
 if ($usersDisc){
 	$usersDisc | % {
