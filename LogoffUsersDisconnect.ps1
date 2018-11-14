@@ -1,8 +1,8 @@
 #Script that disconnects inactive users on system carrying more than 48 h.
-#Created By: Isaac Iborra (isaac.iborra@gmail.com)
+#Created By: Isaac Iborra (iiborra@externos.itnow.es)
 
 
-Get-ChildItem -Path "D:\scripts\Controlsesiones\Logs" -Recurse | Where-Object CreationTime -LT (Get-Date).AddDays(-30) | Remove-Item 
+
 $usersAll = quser
 $usersDisc = quser | select-string "Disc" | select-string -notmatch "services"
 $now = (get-date).tostring('MM_dd_yyyy')
@@ -10,6 +10,7 @@ $results = @()
 $results += $usersAll
 $currentfolder = Split-Path -parent $PSCommandPath 
 $rutaDelArchivo = $currentfolder + "\Logs\MonitDisconnected_"+$now+".txt"
+Get-ChildItem -Path $currentfolder"\Logs" -Recurse | Where-Object CreationTime -LT (Get-Date).AddDays(-30) | Remove-Item 
 
 if ($usersDisc){
 	$usersDisc | % {
@@ -26,6 +27,7 @@ if ($usersDisc){
 				$comments = "Proceed to disconnecting the user: $user dated $date for $days to Disconnect"
 				Write-Host $comments
 				$results += $comments
+				logoff ($_.tostring() -split ' +')[2]
 			}
 		} else {
 			$comments = "The user $user idle time to disconnect is $date"
