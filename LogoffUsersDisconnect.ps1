@@ -1,7 +1,6 @@
 #Script that disconnects inactive users on system carrying more than 48 h.
 #Created By: Isaac Iborra (isaac.iborra@gmail.com)
 
-$usersAll = quser
 $usersDisc = quser | select-string "Disc" | select-string -notmatch "services"
 $now = (get-date).tostring('MM_dd_yyyy')
 $results = @()
