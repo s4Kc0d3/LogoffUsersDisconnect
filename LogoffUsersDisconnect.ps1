@@ -1,8 +1,6 @@
 #Script that disconnects inactive users on system carrying more than 48 h.
 #Created By: Isaac Iborra (iiborra@externos.itnow.es)
 
-
-
 $usersAll = quser
 $usersDisc = quser | select-string "Disc" | select-string -notmatch "services"
 $now = (get-date).tostring('MM_dd_yyyy')
@@ -32,6 +30,7 @@ if ($usersDisc){
 		} else {
 			$comments = "The user $user idle time to disconnect is $date"
 			Write-Host $comments
+			$results += $comments
 		}
 	}
 
